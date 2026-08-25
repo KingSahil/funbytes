@@ -13,8 +13,8 @@ Governs the verification, building, and deployment process for the FunBytes back
 
 ## Release Checklist
 1. **Pre-flight Checks**:
-   - `npm test` passes 100%.
-   - TypeScript check (`npx tsc --noEmit`) passes with zero errors.
+   - `bun test` passes 100%.
+   - TypeScript check (`bun x tsc --noEmit`) passes with zero errors.
    - ESLint passes without errors.
 2. **Environment Checks**:
    - Production API URL configured in `.env.production`.

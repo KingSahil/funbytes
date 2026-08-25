@@ -10,10 +10,9 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
-        tabBarActiveTintColor: Colors.primaryLight,
-        tabBarInactiveTintColor: Colors.textTertiary,
-        tabBarShowLabel: true,
-        tabBarLabelStyle: styles.tabLabel,
+        tabBarActiveTintColor: Colors.textPrimary,
+        tabBarInactiveTintColor: Colors.textSecondary,
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
@@ -21,39 +20,38 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: 'Search',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'compass' : 'compass-outline'} size={23} color={color} />
+            <Ionicons name={focused ? 'search' : 'search-outline'} size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="create"
         options={{
-          title: 'Create',
+          title: 'Post',
           tabBarIcon: ({ focused }) => (
             <View style={styles.createButton}>
-              <Ionicons name="add" size={24} color={Colors.textPrimary} />
+              <Ionicons name="add" size={24} color="#FFFFFF" />
             </View>
           ),
-          tabBarLabel: () => null,
         }}
       />
       <Tabs.Screen
         name="notifications"
         options={{
-          title: 'Alerts',
+          title: 'Notifications',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? 'notifications' : 'notifications-outline'}
-              size={22}
+              size={24}
               color={color}
             />
           ),
@@ -62,9 +60,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Saved',
+          title: 'Bookmarks',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'bookmark' : 'bookmark-outline'} size={22} color={color} />
+            <Ionicons name={focused ? 'bookmark' : 'bookmark-outline'} size={24} color={color} />
           ),
         }}
       />
@@ -75,29 +73,24 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: Colors.background,
-    borderTopWidth: 1,
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: Colors.border,
-    height: Platform.OS === 'ios' ? 88 : 62,
-    paddingBottom: Platform.OS === 'ios' ? 28 : 8,
-    paddingTop: 8,
-  },
-  tabLabel: {
-    fontSize: Typography.fontSizes.xs,
-    fontWeight: '600',
+    height: Platform.OS === 'ios' ? 84 : 58,
+    paddingBottom: Platform.OS === 'ios' ? 24 : 6,
+    paddingTop: 6,
   },
   createButton: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: Platform.OS === 'ios' ? 4 : 8,
     shadowColor: Colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
   },
 });
 

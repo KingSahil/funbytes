@@ -1,42 +1,42 @@
 export const Colors = {
-  // Backgrounds (Luxury Dark First)
-  background: '#090A0F',
-  card: '#12141D',
-  cardElevated: '#181B26',
-  cardHighlight: '#1E2333',
-  inputBackground: '#161922',
+  // Backgrounds (Pure Pitch Black - X/Twitter Dark Mode)
+  background: '#000000',
+  card: '#000000',
+  cardElevated: '#16181C',
+  cardHighlight: '#181818',
+  inputBackground: '#202327',
 
-  // Borders
-  border: '#232838',
-  borderLight: '#32394E',
-  borderFocus: '#6366F1',
+  // Borders & Dividers
+  border: '#2F3336',
+  borderLight: '#1E2732',
+  borderFocus: '#1D9BF0',
 
-  // Brand & Accents
-  primary: '#6366F1',        // Electric Indigo
-  primaryLight: '#818CF8',
-  secondary: '#00F5D4',      // Cyan Byte
-  accentGold: '#FFB703',     // Trending & Hot
-  accentMeme: '#F72585',     // Memes & Humor
-  accentLike: '#FF4D6D',     // Like Heart
-  accentShare: '#38BDF8',
-  accentSuccess: '#10B981',
-  accentWarning: '#F59E0B',
-  accentError: '#EF4444',
+  // Brand & Accents (Authentic X Palette)
+  primary: '#1D9BF0',        // X / Twitter Electric Blue
+  primaryLight: '#1D9BF0',
+  secondary: '#00BA7C',      // Retweet Green
+  accentGold: '#FFD700',     // Verified Gold / Highlights
+  accentMeme: '#F91880',     // Memes & Humor (Pink)
+  accentLike: '#F91880',     // Twitter Like Heart
+  accentShare: '#1D9BF0',    // Twitter Share Blue
+  accentSuccess: '#00BA7C',  // Verified Green
+  accentWarning: '#FFD700',
+  accentError: '#F4212E',
 
-  // Typography
-  textPrimary: '#FFFFFF',
-  textSecondary: '#94A3B8',
-  textTertiary: '#64748B',
-  textMuted: '#475569',
-  textInverse: '#090A0F',
+  // Typography (X High Contrast Typography)
+  textPrimary: '#E7E9EA',    // Crisp Twitter White
+  textSecondary: '#71767B',  // Twitter Subtext Gray
+  textTertiary: '#536471',   // Twitter Timestamp / Muted
+  textMuted: '#2F3336',
+  textInverse: '#000000',
 
   // Source badges
   badgeReddit: '#FF4500',
-  badgeMedium: '#00AB6C',
-  badgeDevHumor: '#7209B7',
-  badgeBBC: '#BB1919',
-  badgePIB: '#0284C7',
-  badgePolitico: '#D97706',
+  badgeMedium: '#FFFFFF',
+  badgeDevHumor: '#1D9BF0',
+  badgeBBC: '#F4212E',
+  badgePIB: '#1D9BF0',
+  badgePolitico: '#FFD700',
 };
 
 export const Spacing = {

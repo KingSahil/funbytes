@@ -31,8 +31,8 @@ Establishes the testing methodology, edge cases to cover, and automation require
 ## Test Commands
 ```bash
 # Backend unit tests
-cd backend && npm test
+cd backend && bun test
 
 # Mobile unit & store tests
-cd apps/mobile && npm test
+cd apps/mobile && bun test
 ```

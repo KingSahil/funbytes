@@ -20,7 +20,7 @@ Thank you for your interest in contributing to FunBytes! We welcome contribution
 3. Install dependencies in `backend/` and `apps/mobile/`.
 4. Ensure your changes pass type checking and tests:
    ```bash
-   npm test
+   bun test
    ```
 5. Follow code style guidelines:
    - TypeScript strict mode
