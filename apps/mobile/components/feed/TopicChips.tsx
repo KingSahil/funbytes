@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { TOPIC_CATEGORIES, TopicDefinition } from '../../constants/topics';
-import { Colors, Spacing, Typography, BorderRadius } from '../../constants/theme';
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { TOPIC_CATEGORIES } from '../../constants/topics';
+import { Colors, Spacing, Typography } from '../../constants/theme';
+import * as Haptics from 'expo-haptics';
 
 interface TopicChipsProps {
   activeTopic: string;
@@ -10,73 +11,81 @@ interface TopicChipsProps {
 
 export const TopicChips: React.FC<TopicChipsProps> = ({ activeTopic, onSelectTopic }) => {
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.container}
-    >
-      {TOPIC_CATEGORIES.map((topic) => {
-        const isSelected = activeTopic.toLowerCase() === topic.id.toLowerCase();
-        return (
-          <TouchableOpacity
-            key={topic.id}
-            style={[
-              styles.chip,
-              isSelected && styles.chipSelected,
-              isSelected && { borderColor: topic.color },
-            ]}
-            onPress={() => onSelectTopic(topic.id)}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.icon}>{topic.icon}</Text>
-            <Text
-              style={[
-                styles.label,
-                isSelected && styles.labelSelected,
-                isSelected && { color: topic.color },
-              ]}
+    <View style={styles.wrapper}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+        style={styles.scrollView}
+      >
+        {TOPIC_CATEGORIES.map((topic) => {
+          const isSelected = activeTopic.toLowerCase() === topic.id.toLowerCase();
+          return (
+            <TouchableOpacity
+              key={topic.id}
+              style={styles.tabItem}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+                onSelectTopic(topic.id);
+              }}
+              activeOpacity={0.7}
             >
-              {topic.name}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
-    </ScrollView>
+              <Text style={[styles.tabLabel, isSelected ? styles.tabLabelActive : styles.tabLabelInactive]}>
+                {topic.name}
+              </Text>
+              {isSelected && <View style={styles.activeIndicator} />}
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm + 2,
-    gap: Spacing.sm,
+  wrapper: {
+    height: 48,
     backgroundColor: Colors.background,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.border,
+    zIndex: 10,
   },
-  chip: {
-    flexDirection: 'row',
+  scrollView: {
+    flexGrow: 0,
+    height: 48,
+  },
+  scrollContent: {
+    paddingHorizontal: Spacing.sm,
     alignItems: 'center',
-    paddingHorizontal: Spacing.md,
-    paddingVertical: 7,
-    borderRadius: BorderRadius.full,
-    backgroundColor: Colors.card,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    height: 48,
   },
-  chipSelected: {
-    backgroundColor: Colors.cardElevated,
+  tabItem: {
+    height: 48,
+    paddingHorizontal: Spacing.md + 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
   },
-  icon: {
-    fontSize: 14,
-    marginRight: 6,
+  tabLabel: {
+    fontSize: Typography.fontSizes.md,
+    letterSpacing: -0.2,
   },
-  label: {
-    fontSize: Typography.fontSizes.sm,
-    fontWeight: '600',
-    color: Colors.textSecondary,
-  },
-  labelSelected: {
+  tabLabelActive: {
     color: Colors.textPrimary,
     fontWeight: '700',
+  },
+  tabLabelInactive: {
+    color: Colors.textSecondary,
+    fontWeight: '500',
+  },
+  activeIndicator: {
+    position: 'absolute',
+    bottom: 0,
+    left: Spacing.md,
+    right: Spacing.md,
+    height: 3.5,
+    borderRadius: 2,
+    backgroundColor: Colors.primary,
   },
 });
 

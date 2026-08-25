@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   StyleSheet,
   FlatList,
   RefreshControl,
   ActivityIndicator,
-  SafeAreaView,
   Text,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Redirect } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, Spacing } from '../../constants/theme';
 import { Header } from '../../components/common/Header';
 import { TopicChips } from '../../components/feed/TopicChips';
@@ -23,15 +23,12 @@ import { useUserStore } from '../../store/useUserStore';
 import { ContentItem } from '@funbytes/types';
 
 export default function HomeScreen() {
-  const router = useRouter();
   const { hasCompletedOnboarding } = useUserStore();
   const [activeTopic, setActiveTopic] = useState('all');
 
-  useEffect(() => {
-    if (!hasCompletedOnboarding) {
-      router.replace('/onboarding');
-    }
-  }, [hasCompletedOnboarding]);
+  if (!hasCompletedOnboarding) {
+    return <Redirect href="/onboarding" />;
+  }
 
   const {
     data,

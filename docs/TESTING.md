@@ -9,8 +9,9 @@
 ```bash
 # Run all backend unit and integration tests
 cd backend
-npm test
+bun test
 
-# Run tests with coverage
-npm test -- --coverage
+# Run mobile tests
+cd ../apps/mobile
+bun test
 ```

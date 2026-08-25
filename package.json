@@ -9,11 +9,11 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:backend": "npm --prefix backend run dev",
-    "dev:mobile": "npm --prefix apps/mobile start",
-    "build": "npm --prefix backend run build",
-    "test": "npm --prefix backend test",
-    "lint": "npm --prefix backend run lint"
+    "dev:backend": "bun run --cwd backend dev",
+    "dev:mobile": "bun run --cwd apps/mobile start",
+    "build": "bun run --cwd backend build",
+    "test": "bun run --cwd backend test",
+    "lint": "bun run --cwd backend lint"
   },
   "keywords": [
     "funbytes",

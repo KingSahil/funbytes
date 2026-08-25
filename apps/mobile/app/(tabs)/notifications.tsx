@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, Spacing, Typography, BorderRadius } from '../../constants/theme';
 import { Header } from '../../components/common/Header';
 import { Ionicons } from '@expo/vector-icons';

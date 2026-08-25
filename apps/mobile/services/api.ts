@@ -1,13 +1,28 @@
 import axios from 'axios';
+import Constants from 'expo-constants';
 import { ContentItem, FeedResponse, Comment, Category, FeedStyle } from '@funbytes/types';
 import { mockFeedData } from '../../../backend/src/data/mockFeedData';
 import { rankingEngine } from '../../../backend/src/services/ranking';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:4000/api';
+const getBaseUrl = (): string => {
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL.endsWith('/api')
+      ? process.env.EXPO_PUBLIC_API_URL
+      : `${process.env.EXPO_PUBLIC_API_URL}/api`;
+  }
+  const hostUri = Constants.expoConfig?.hostUri;
+  if (hostUri) {
+    const host = hostUri.split(':')[0];
+    return `http://${host}:4000/api`;
+  }
+  return 'http://127.0.0.1:4000/api';
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 3500,
+  timeout: 5000,
 });
 
 export const api = {

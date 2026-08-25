@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ showSearch = true, showBell = tr
             onPress={() => router.push('/(tabs)/notifications')}
             activeOpacity={0.7}
           >
-            <Ionicons name="notifications-outline" size={22} color={Colors.textPrimary} />
+            <Ionicons name="notifications-outline" size={21} color={Colors.textPrimary} />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
         )}
@@ -63,44 +63,44 @@ export const Header: React.FC<HeaderProps> = ({ showSearch = true, showBell = tr
 
 const styles = StyleSheet.create({
   container: {
+    height: 52,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.md,
     backgroundColor: Colors.background,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border,
   },
   profileButton: {
     padding: 2,
   },
   avatar: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    borderWidth: 1.5,
-    borderColor: Colors.primary,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: Colors.border,
   },
   brandContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   brandFun: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '900',
-    letterSpacing: 1.2,
-    color: Colors.primary,
+    letterSpacing: 1,
+    color: Colors.textPrimary,
   },
   brandBytes: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '900',
-    letterSpacing: 1.2,
-    color: Colors.secondary,
+    letterSpacing: 1,
+    color: Colors.primary,
   },
   brandBolt: {
-    fontSize: 18,
-    marginLeft: 3,
+    fontSize: 16,
+    marginLeft: 2,
   },
   titleText: {
     fontSize: Typography.fontSizes.lg,
@@ -110,13 +110,12 @@ const styles = StyleSheet.create({
   actionsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.sm,
+    gap: Spacing.xs,
   },
   iconButton: {
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: Colors.card,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -125,10 +124,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 7,
     right: 7,
-    width: 7,
-    height: 7,
-    borderRadius: 3.5,
-    backgroundColor: Colors.accentLike,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: Colors.primary,
   },
 });
 

@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Spacing, Typography } from '../../constants/theme';
+import { Colors, Typography } from '../../constants/theme';
 import { ContentItem } from '@funbytes/types';
 import { useInteractionStore } from '../../store/useInteractionStore';
 import { useBookmarkStore } from '../../store/useBookmarkStore';
 import { shareService } from '../../services/share';
-import * as WebBrowser from 'expo-web-browser';
 import * as Haptics from 'expo-haptics';
 
 interface EngagementBarProps {
@@ -25,7 +24,6 @@ export const EngagementBar: React.FC<EngagementBarProps> = ({ item, onPressComme
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   const handleLike = () => {
-    // Spring bounce animation
     Animated.sequence([
       Animated.timing(scaleAnim, { toValue: 1.35, duration: 120, useNativeDriver: true }),
       Animated.spring(scaleAnim, { toValue: 1, friction: 4, useNativeDriver: true }),
@@ -44,27 +42,8 @@ export const EngagementBar: React.FC<EngagementBarProps> = ({ item, onPressComme
     shareService.sharePost(item);
   };
 
-  const handleMore = () => {
-    Alert.alert(
-      item.title,
-      'Choose an action:',
-      [
-        {
-          text: 'Open Original Article',
-          onPress: () => WebBrowser.openBrowserAsync(item.articleUrl).catch(() => {}),
-        },
-        {
-          text: 'Report Content',
-          style: 'destructive',
-          onPress: () => Alert.alert('Reported', 'Thank you. Our moderation team will review this byte.'),
-        },
-        { text: 'Cancel', style: 'cancel' },
-      ],
-      { cancelable: true }
-    );
-  };
-
   const formatCount = (num: number = 0) => {
+    if (num <= 0) return '';
     if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
     if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num.toString();
@@ -72,44 +51,50 @@ export const EngagementBar: React.FC<EngagementBarProps> = ({ item, onPressComme
 
   return (
     <View style={styles.container}>
-      {/* Like Button */}
-      <TouchableOpacity style={styles.actionButton} onPress={handleLike} activeOpacity={0.7}>
+      {/* Reply */}
+      <TouchableOpacity style={styles.actionButton} onPress={onPressComments} activeOpacity={0.6}>
+        <Ionicons name="chatbubble-outline" size={17} color={Colors.textSecondary} />
+        {item.engagement?.comments ? (
+          <Text style={styles.actionText}>{formatCount(item.engagement.comments)}</Text>
+        ) : null}
+      </TouchableOpacity>
+
+      {/* Repost */}
+      <TouchableOpacity style={styles.actionButton} onPress={handleShare} activeOpacity={0.6}>
+        <Ionicons name="repeat-outline" size={19} color={Colors.textSecondary} />
+        {item.engagement?.shares ? (
+          <Text style={styles.actionText}>{formatCount(item.engagement.shares)}</Text>
+        ) : null}
+      </TouchableOpacity>
+
+      {/* Like */}
+      <TouchableOpacity style={styles.actionButton} onPress={handleLike} activeOpacity={0.6}>
         <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
           <Ionicons
             name={liked ? 'heart' : 'heart-outline'}
-            size={20}
+            size={18}
             color={liked ? Colors.accentLike : Colors.textSecondary}
           />
         </Animated.View>
-        <Text style={[styles.actionText, liked && { color: Colors.accentLike, fontWeight: '700' }]}>
-          {formatCount(likesCount)}
-        </Text>
+        {likesCount > 0 ? (
+          <Text style={[styles.actionText, liked && { color: Colors.accentLike }]}>
+            {formatCount(likesCount)}
+          </Text>
+        ) : null}
       </TouchableOpacity>
 
-      {/* Comment Button */}
-      <TouchableOpacity style={styles.actionButton} onPress={onPressComments} activeOpacity={0.7}>
-        <Ionicons name="chatbubble-outline" size={18} color={Colors.textSecondary} />
-        <Text style={styles.actionText}>{formatCount(item.engagement?.comments || 0)}</Text>
-      </TouchableOpacity>
-
-      {/* Share Button */}
-      <TouchableOpacity style={styles.actionButton} onPress={handleShare} activeOpacity={0.7}>
-        <Ionicons name="repeat-outline" size={20} color={Colors.textSecondary} />
-        <Text style={styles.actionText}>{formatCount(item.engagement?.shares || 0)}</Text>
-      </TouchableOpacity>
-
-      {/* Bookmark Button */}
-      <TouchableOpacity style={styles.iconOnlyButton} onPress={handleBookmark} activeOpacity={0.7}>
+      {/* Bookmark */}
+      <TouchableOpacity style={styles.actionButton} onPress={handleBookmark} activeOpacity={0.6}>
         <Ionicons
           name={bookmarked ? 'bookmark' : 'bookmark-outline'}
-          size={19}
-          color={bookmarked ? Colors.secondary : Colors.textSecondary}
+          size={17}
+          color={bookmarked ? Colors.primary : Colors.textSecondary}
         />
       </TouchableOpacity>
 
-      {/* More Button */}
-      <TouchableOpacity style={styles.iconOnlyButton} onPress={handleMore} activeOpacity={0.7}>
-        <Ionicons name="ellipsis-horizontal" size={19} color={Colors.textTertiary} />
+      {/* Share / Export */}
+      <TouchableOpacity style={styles.actionButton} onPress={handleShare} activeOpacity={0.6}>
+        <Ionicons name="share-outline" size={17} color={Colors.textSecondary} />
       </TouchableOpacity>
     </View>
   );
@@ -120,25 +105,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: Spacing.md,
-    marginTop: Spacing.xs,
-    borderTopWidth: 1,
-    borderTopColor: Colors.border,
+    paddingTop: 8,
+    marginTop: 2,
+    maxWidth: 340,
   },
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 4,
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
     gap: 5,
-  },
-  iconOnlyButton: {
-    padding: 6,
   },
   actionText: {
     fontSize: Typography.fontSizes.xs,
     color: Colors.textSecondary,
-    fontWeight: '600',
+    fontWeight: '500',
     fontVariant: ['tabular-nums'],
   },
 });

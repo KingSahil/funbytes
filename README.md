@@ -39,19 +39,18 @@ funbytes/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js >= 18
-- npm or yarn
+- Bun >= 1.0.0
 - Expo Go app on Android/iOS (or Android Emulator)
 
 ### 1. Clone & Install Dependencies
 ```bash
 # Install backend dependencies
 cd backend
-npm install
+bun install
 
 # Install mobile dependencies
 cd ../apps/mobile
-npm install
+bun install
 ```
 
 ### 2. Configure Environment
@@ -63,14 +62,14 @@ cp .env.example .env
 ### 3. Run the Backend API
 ```bash
 cd backend
-npm run dev
+bun run dev
 # Server starts at http://localhost:4000
 ```
 
 ### 4. Run the Mobile App (Expo)
 ```bash
 cd apps/mobile
-npm start
+bun start
 ```
 Scan the QR code with **Expo Go** or press `a` to launch in Android Emulator.
 
@@ -82,7 +81,7 @@ Run the comprehensive unit and integration test suite:
 ```bash
 # Run all backend & domain tests
 cd backend
-npm test
+bun test
 ```
 
 ---
