@@ -1,0 +1,29 @@
+{
+  "name": "funbytes-monorepo",
+  "version": "1.0.0",
+  "description": "FunBytes - Personalized News, Memes & Social Feed App",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "backend",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:mobile": "npm --prefix apps/mobile start",
+    "build": "npm --prefix backend run build",
+    "test": "npm --prefix backend test",
+    "lint": "npm --prefix backend run lint"
+  },
+  "keywords": [
+    "funbytes",
+    "react-native",
+    "expo",
+    "typescript",
+    "news",
+    "memes",
+    "social-feed"
+  ],
+  "author": "FunBytes Team",
+  "license": "MIT"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "funbytes-mobile",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "test": "jest --passWithNoTests --forceExit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^14.0.4",
+    "@funbytes/types": "file:../../packages/types",
+    "@react-native-async-storage/async-storage": "^2.1.0",
+    "@tanstack/react-query": "^5.66.0",
+    "axios": "^1.7.9",
+    "expo": "~52.0.35",
+    "expo-constants": "~17.0.7",
+    "expo-haptics": "~14.0.1",
+    "expo-linking": "~7.0.5",
+    "expo-router": "~4.0.17",
+    "expo-sharing": "~13.0.1",
+    "expo-status-bar": "~2.0.1",
+    "expo-web-browser": "~14.0.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.7",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
+    "react-native-web": "^0.19.13",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/jest": "^29.5.14",
+    "@types/react": "~18.3.12",
+    "jest": "^29.7.0",
+    "jest-expo": "~52.0.0",
+    "typescript": "^5.3.3"
+  },
+  "private": true
+}
